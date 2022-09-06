@@ -1,0 +1,20 @@
+{
+  "name": "lru-cache",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lru-cache.js",
+  "scripts": {
+    "test": "node linked-list.test.js && node lru-cache.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aledpardo/lru-cache.git"
+  },
+  "keywords": [],
+  "author": "aledpardo <aledpviola@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aledpardo/lru-cache/issues"
+  },
+  "homepage": "https://github.com/aledpardo/lru-cache#readme"
+}
