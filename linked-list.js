@@ -50,10 +50,6 @@ class LinkedList {
     if (this.#size === 0) {
       this.#head = node;
       this.#tail = node;
-    } else  if (this.#size === 1) {
-      this.#head.setNext(node);
-      node.setPrev(this.#head);
-      this.#tail = node;
     } else {
       this.#tail.setNext(node);
       node.setPrev(this.#tail);
@@ -61,6 +57,14 @@ class LinkedList {
     this.#tail = node;
     this.#size++;
     return node;
+  }
+
+  first() {
+    return this.#head;
+  }
+
+  last() {
+    return this.#tail;
   }
 
   /**
@@ -114,4 +118,7 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
+module.exports = {
+  LinkedList,
+  Node
+};

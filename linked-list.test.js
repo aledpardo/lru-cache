@@ -1,5 +1,5 @@
 const assert = require('assert');
-const LinkedList = require('./linked-list');
+const {LinkedList} = require('./linked-list');
 const test = require('./test');
 
 test('instantiate LinkedList', () => {

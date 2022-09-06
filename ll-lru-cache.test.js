@@ -1,10 +1,28 @@
 const assert = require('assert');
 const test = require('./test');
-const LRUCache = require('./lru-cache');
+const LRUCache = require('./ll-lru-cache');
 
 test('instantiate LRUCache', () => {
-  const lru = new LRUCache(0);
+  const lru = new LRUCache(1);
   assert(lru instanceof LRUCache, 'not an instanceof LRUCache');
+});
+
+test('fail to instantiate LRUCache with capacity NaN', () => {
+  try {
+    const lru = new LRUCache();
+    throw new Error('should have thrown AssertionError');
+  } catch (error) {
+    assert(error.message === 'capacity should be a number', 'not expected LRUCache capacity validation error');
+  }
+});
+
+test('fail to instantiate LRUCache with capacity 0', () => {
+  try {
+    const lru = new LRUCache(0);
+    throw new Error('should have thrown AssertionError');
+  } catch (error) {
+    assert(error.message === 'capacity should be greater than zero', 'not expected LRUCache capacity validation error');
+  }
 });
 
 test('put a key', () => {
