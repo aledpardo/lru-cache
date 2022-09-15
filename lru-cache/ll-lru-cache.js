@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {LinkedList, Node} = require('./linked-list/linked-list');
+const {LinkedList,Node} = require('../linked-list/linked-list');
 
 class LRUCacheData {
   /**

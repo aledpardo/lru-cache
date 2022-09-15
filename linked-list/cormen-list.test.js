@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {describe, test} = require('./simple-test');
+const {describe, test} = require('../test-tool/simple-test');
 
 describe('List', () => {
   describe('Module', () => {

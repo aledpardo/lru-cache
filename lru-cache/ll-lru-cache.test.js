@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {describe, test} = require('./test-tool/simple-test');
+const {describe, test} = require('../test-tool/simple-test');
 const LRUCache = require('./ll-lru-cache');
 
 describe('Linked List LRU Cache', () => {
