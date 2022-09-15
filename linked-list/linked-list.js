@@ -100,8 +100,12 @@ class LinkedList {
       this.#size--;
       return true;
     }
+    if (node === this.#tail) {
+      this.#tail = node.prev;
+    } else {
+      node.next.setPrev(node.prev);
+    }
     node.prev.setNext(node.next);
-    node.next.setPrev(node.prev);
     this.#size--;
     return true;
   }

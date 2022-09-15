@@ -32,7 +32,6 @@ class LRUCache {
    * @type {LinkedList}
    */
   #lru = null;
-
   /**
    *
    * @param {number} capacity
@@ -40,8 +39,17 @@ class LRUCache {
   constructor(capacity) {
     assert(typeof capacity === 'number', 'capacity should be a number');
     assert(capacity > 0, 'capacity should be greater than zero');
-    this.#capacity = capacity
+    /**
+     * @type {number}
+     */
+    this.#capacity = capacity;
+    /**
+     * @type {Map<number, LRUCacheData>}
+     */
     this.#cache = new Map();
+    /**
+     * @type {LinkedList}
+     */
     this.#lru = new LinkedList(capacity);
   }
 
@@ -59,9 +67,9 @@ class LRUCache {
       return data.value;
     }
     // TODO: make reassignment rather than remove/append
-    this.#lru.moveToTail(data.lruNode);
-    // this.#lru.remove(data.lruNode);
-    // data.lruNode = this.#lru.append(key);;
+    // this.#lru.moveToTail(data.lruNode);
+    this.#lru.remove(data.lruNode);
+    data.lruNode = this.#lru.append(key);
     return data.value;
   }
 
@@ -72,10 +80,9 @@ class LRUCache {
    * @returns {void}
    */
   put(key, value) {
-    const data = this.#cache.get(key);
-    if (typeof data !== 'undefined') {
+    if (this.get(key) > -1) {
+      const data = this.#cache.get(key);
       data.value = value;
-      this.#lru.moveToTail(data.lruNode);
       return;
     }
     const isAtCapacity = this.#capacity > 0 && this.#cache.size === this.#capacity;

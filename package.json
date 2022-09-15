@@ -4,7 +4,7 @@
   "description": "",
   "main": "lru-cache.js",
   "scripts": {
-    "test": "node ./lru-cache/lru-cache.test.js && node ./lru-cache/ll-lru-cache.test.js && node ./linked-list/linked-list.test.js"
+    "test": "node ./lru-cache/lru-cache.test.js && node ./lru-cache/ll-lru-cache.test.js && node ./linked-list/linked-list.test.js && node ./lru-cache/leet-code.test.js"
   },
   "repository": {
     "type": "git",

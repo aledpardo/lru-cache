@@ -9,3 +9,4 @@ for (let index = 1; index < ops.length; index++) {
     const ip = inputs[index];
     lru[op](ip[0], ip[1]);
 }
+console.log('finished leet code test');
