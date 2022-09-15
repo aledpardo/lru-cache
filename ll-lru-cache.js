@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {LinkedList, Node} = require('./linked-list');
+const {LinkedList, Node} = require('./linked-list/linked-list');
 
 class LRUCacheData {
   /**
@@ -51,18 +51,18 @@ class LRUCache {
    * @returns {number|undefined}
    */
   get(key) {
-    if (!this.#cache.has(key)) {
-      return;
-    }
     const data = this.#cache.get(key);
-    const { value } = data;
-    // already the latest used
-    if (data.lruNode === this.#lru.last()) {
-      return value;
+    if (typeof data === 'undefined') {
+      return -1;
     }
-    this.#lru.remove(data.lruNode);
-    data.lruNode = this.#lru.append(key);;
-    return value;
+    if (data.lruNode === this.#lru.last()) {
+      return data.value;
+    }
+    // TODO: make reassignment rather than remove/append
+    this.#lru.moveToTail(data.lruNode);
+    // this.#lru.remove(data.lruNode);
+    // data.lruNode = this.#lru.append(key);;
+    return data.value;
   }
 
   /**
@@ -72,10 +72,17 @@ class LRUCache {
    * @returns {void}
    */
   put(key, value) {
+    const data = this.#cache.get(key);
+    if (typeof data !== 'undefined') {
+      data.value = value;
+      this.#lru.moveToTail(data.lruNode);
+      return;
+    }
     const isAtCapacity = this.#capacity > 0 && this.#cache.size === this.#capacity;
     if (isAtCapacity) {
       const least = this.#lru.first();
       this.#cache.delete(least.data);
+      this.#lru.remove(least);
     }
     const lruNode = this.#lru.append(key);
     this.#cache.set(key, new LRUCacheData(value, lruNode));
