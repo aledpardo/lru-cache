@@ -1,11 +1,4 @@
-const assert = require('assert');
-const {describe, test} = require('../test-tool/simple-test');
+const {LinkedList} = require('./cormen-list');
+const LinkedListInterfaceTest = require('./linked-list-interface.test');
 
-describe('List', () => {
-  describe('Module', () => {
-    test('import module', () => {
-      const list = require('./cormen-list');
-      assert(list != null, 'failed to require list');
-    });
-  });
-});
+LinkedListInterfaceTest(LinkedList);

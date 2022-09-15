@@ -28,7 +28,7 @@ class LinkedList {
      this.size = 0;
   }
 
-  search(data) {
+  find(data) {
     let node = this.head;
     while (node != null && node.data != data) {
       node = node.next;
@@ -37,10 +37,15 @@ class LinkedList {
   }
 
   append(data) {
+    if (this.size === this.capacity) {
+      this.remove(this.tail);
+    }
     const node = new Node(data);
     node.next = this.head;
     if (this.head != null) {
       this.head.prev = node;
+    } else {
+      this.tail = node;
     }
     this.head = node;
     node.prev = null;
@@ -57,7 +62,21 @@ class LinkedList {
     if (node.next != null) {
       node.next.prev = node.prev;
     }
-    size--;
+    this.size--;
+    return true;
+  }
+
+  /**
+   *
+   * @returns {Iterable<Node>}
+   */
+  *[Symbol.iterator]() {
+    let iter = this.tail;
+    do {
+      yield iter;
+      iter = iter?.prev;
+    } while(iter != null);
+    return null;
   }
 }
 
